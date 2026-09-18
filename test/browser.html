@@ -34,6 +34,54 @@ try {
   assert(!doc.getElementById('check').disabled, 'Redo restores the stroke');
   doc.getElementById('clear').click();
   assert(doc.getElementById('check').disabled, 'Clear empties canvas');
+  const storageKey = 'learningrune.samples.v1';
+  const savedNotebook = win.localStorage.getItem(storageKey);
+  try {
+    const mode = doc.getElementById('practice-mode'); mode.value = 'word'; mode.dispatchEvent(new win.Event('change'));
+    const choose = word => { const select = doc.getElementById('word-choice'); select.value = word; select.dispatchEvent(new win.Event('change')); };
+    const boxes = () => [...doc.querySelectorAll('#word-boxes canvas')];
+    const statuses = () => [...doc.querySelectorAll('.slot-feedback')].map(p => p.textContent);
+    const draw = (target, letter, variant = 0) => {
+      const rect = target.getBoundingClientRect(); target.setPointerCapture = () => {};
+      const sendPoint = (type, p) => target.dispatchEvent(new win.PointerEvent(type, { pointerId: 1, button: 0, clientX: rect.left + (p.x * 1.8 + 50) / target.width * rect.width, clientY: rect.top + (p.y * 1.8 + 50) / target.height * rect.height }));
+      for (const stroke of originals.filter(t => t.letter === letter)[variant].strokes) {
+        sendPoint('pointerdown', stroke[0]);
+        for (const point of stroke.slice(1)) sendPoint('pointermove', point);
+        sendPoint('pointerup', stroke.at(-1));
+      }
+    };
+    choose('CAT'); doc.getElementById('word-check').click();
+    assert(statuses().every(s => s === 'Draw a letter here.'), 'Blank word stays incomplete');
+    draw(boxes()[0], 'C'); draw(boxes()[1], 'H'); draw(boxes()[2], 'T');
+    doc.getElementById('word-check').click();
+    assert(statuses()[0] === 'Correct' && statuses()[1].includes('read H') && statuses()[2] === 'Correct', 'Word grading independently reads C H T for CAT');
+    doc.querySelectorAll('.word-slot button')[1].click();
+    assert(doc.getElementById('word-result').textContent.includes('Includes your override'), 'Per-letter override completes word');
+    const notebook = JSON.parse(win.localStorage.getItem(storageKey));
+    assert(notebook.at(-1).label === 'A' && notebook.at(-1).activity === 'word' && notebook.at(-1).word === 'CAT', 'Override saves labeled word sample');
+    boxes()[1].focus(); doc.getElementById('word-undo').click();
+    assert(statuses()[1] === 'Ready to draw' && statuses()[0] === 'Correct' && statuses()[2] === 'Correct', 'Undo invalidates only active grade and override');
+    doc.getElementById('word-redo').click(); doc.getElementById('word-check').click();
+    assert(statuses()[1].includes('read H'), 'Redo restores drawing without restoring override');
+    doc.getElementById('word-clear-letter').click(); draw(boxes()[1], 'A'); doc.getElementById('word-check').click();
+    assert(doc.getElementById('word-result').textContent === 'Correct! CAT is complete.', 'Correcting a single box completes the word');
+    choose('KEY'); draw(boxes()[1], 'E'); doc.getElementById('word-check').click();
+    assert(statuses()[1].includes('Use the full symbol') && doc.querySelectorAll('.word-slot button')[1].hidden, 'Standalone E line explains attachment rule and cannot be overridden');
+    doc.getElementById('word-clear-letter').click(); draw(boxes()[1], 'E', 1); doc.getElementById('word-check').click();
+    assert(statuses()[1] === 'Correct', 'Full E works in word box');
+    choose('DOG'); draw(boxes()[1], 'O'); doc.getElementById('word-check').click();
+    assert(statuses()[1].includes('Use the full symbol'), 'Standalone O line is rejected');
+    doc.getElementById('word-clear-letter').click(); draw(boxes()[1], 'O', 1); doc.getElementById('word-check').click();
+    assert(statuses()[1] === 'Correct', 'Full O works in word box');
+    doc.getElementById('word-clear').click(); doc.getElementById('word-check').click();
+    assert(statuses().every(s => s === 'Draw a letter here.'), 'Clear word removes all drawings');
+    doc.getElementById('word-next').click();
+    assert(doc.getElementById('word-choice').value === 'SUN' && statuses().every(s => s === 'Ready to draw'), 'Next word resets drawings and grades');
+    mode.value = 'letter'; mode.dispatchEvent(new win.Event('change'));
+    assert(!doc.getElementById('letter-practice').hidden && doc.getElementById('word-practice').hidden, 'Letter practice stays available');
+  } finally {
+    if (savedNotebook === null) win.localStorage.removeItem(storageKey); else win.localStorage.setItem(storageKey, savedNotebook);
+  }
 } catch (error) { results.push(`FAIL ${error.stack}`); }
 output.textContent = results.join('\n');
 document.title = results.some(r => r.startsWith('FAIL')) ? 'FAIL' : 'PASS';

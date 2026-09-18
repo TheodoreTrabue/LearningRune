@@ -295,6 +295,20 @@ aside p {
     grid-column: 1/-1
 }
 
+.practice-picker { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; margin-bottom:24px; padding-bottom:18px; border-bottom:1px solid var(--line); font:13px system-ui,sans-serif; }
+#word-boxes { display:flex; flex-wrap:wrap; gap:12px; }
+.word-slot { flex:1 1 150px; min-width:145px; max-width:210px; padding:10px; border:2px solid var(--line); border-radius:8px; background:#fffdf8; }
+.word-slot canvas { margin-top:10px; border:1px solid var(--line); border-radius:5px; }
+.word-slot.active-pad { outline:2px solid #8c7960; outline-offset:3px; }
+.word-slot.accepted { border-color:#548564; background:#f0f5e9; }
+.word-slot.needs-correction { border-color:#ba8066; }
+.slot-feedback { font:13px/1.5 system-ui,sans-serif; margin:10px 0 0; }
+.word-answer p { font-size:12px; margin:8px 0 0; }
+.word-answer .symbol { width:60px; height:60px; }
+.word-slot button { font-size:12px; padding:7px; }
+#word-result { min-height:48px; }
+canvas:focus-visible { outline:3px solid #52735e; outline-offset:2px; }
+
 #alphabet-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));

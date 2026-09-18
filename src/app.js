@@ -1,13 +1,15 @@
+import { DrawingPad } from './drawing-pad.js';
+import { initWordPractice } from './word-practice.js';
 import { alphabet, symbolSvg, makeTemplates } from './alphabet.js';
 import { prepareTemplates, recognize } from './recognizer.js';
 import { handwritingTemplates } from './handwriting-templates.js';
 
 const $ = id => document.getElementById(id);
-const canvas = $('drawing'), ctx = canvas.getContext('2d');
+
 const templates = [...prepareTemplates(makeTemplates()), ...handwritingTemplates];
 const letters = Object.keys(alphabet);
 const storageKey = 'learningrune.samples.v1';
-let strokes = [], redo = [], active = null, pointerId = null, ink = '#292b29';
+let ink = '#292b29';
 let samples = [], revision = 0, checkedRevision = -1, prediction = null, savedRevision = -1;
 try {
   const stored = JSON.parse(localStorage.getItem(storageKey) || '[]');
@@ -30,45 +32,19 @@ for (const [name, color] of Object.entries({ Black: '#292b29', Red: '#ad3a36', G
   label.append(radio, swatch); $('colors').append(label);
 }
 
+const pad = new DrawingPad($('drawing'), { ink: () => ink, onUpdate: changed => { if (changed) invalidate(); redraw(); } });
 function redraw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (const stroke of [...strokes, ...(active ? [active] : [])]) {
-    ctx.strokeStyle = stroke.color; ctx.fillStyle = stroke.color; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    ctx.beginPath(); stroke.points.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.stroke();
-    if (stroke.points.length === 1) { const p = stroke.points[0]; ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); ctx.fill(); }
-  }
-  $('undo').disabled = !strokes.length || !!active; $('redo').disabled = !redo.length || !!active;
-  $('check').disabled = !strokes.length || !!active; $('save').disabled = !strokes.length || !!active || savedRevision === revision;
+  $('undo').disabled = !pad.strokes.length || !!pad.active; $('redo').disabled = !pad.redoStack.length || !!pad.active;
+  $('check').disabled = !pad.strokes.length || !!pad.active; $('save').disabled = !pad.strokes.length || !!pad.active || savedRevision === revision;
 }
 function invalidate() {
   revision++; checkedRevision = -1; prediction = null; $('correction').hidden = true;
   $('result').className = ''; $('result').textContent = 'Ready when you are.';
 }
-function point(event) {
-  const bounds = canvas.getBoundingClientRect();
-  return { x: Math.max(0, Math.min(canvas.width, (event.clientX - bounds.left) / bounds.width * canvas.width)), y: Math.max(0, Math.min(canvas.height, (event.clientY - bounds.top) / bounds.height * canvas.height)) };
-}
-canvas.addEventListener('pointerdown', event => {
-  if (active || event.button !== 0) return;
-  event.preventDefault(); pointerId = event.pointerId; canvas.setPointerCapture(pointerId);
-  invalidate(); active = { color: ink, points: [point(event)] }; redraw();
-});
-canvas.addEventListener('pointermove', event => {
-  if (!active || event.pointerId !== pointerId) return;
-  const coalesced = event.getCoalescedEvents?.();
-  for (const sample of coalesced?.length ? coalesced : [event]) active.points.push(point(sample));
-  redraw();
-});
-function finish(event) {
-  if (!active || event.pointerId !== pointerId) return;
-  if (event.type === 'pointerup') active.points.push(point(event));
-  strokes.push(active); active = null; redo = []; pointerId = null; redraw();
-}
-canvas.addEventListener('pointerup', finish); canvas.addEventListener('pointercancel', finish); canvas.addEventListener('lostpointercapture', finish);
-function clear() { active = null; pointerId = null; strokes = []; redo = []; invalidate(); redraw(); }
+function clear() { pad.clear(); }
 $('clear').onclick = clear;
-$('undo').onclick = () => { if (strokes.length) { redo.push(strokes.pop()); invalidate(); redraw(); } };
-$('redo').onclick = () => { if (redo.length) { strokes.push(redo.pop()); invalidate(); redraw(); } };
+$('undo').onclick = () => pad.undo();
+$('redo').onclick = () => pad.redo();
 function updatePrompt() {
   clear(); const collecting = $('mode').value === 'collect';
   $('prompt').textContent = `Draw the Greenrune equivalent of ${$('letter').value}`;
@@ -79,7 +55,7 @@ $('letter').onchange = updatePrompt; $('mode').onchange = updatePrompt;
 $('random').onclick = () => { const choices = letters.filter(l => l !== $('letter').value); $('letter').value = choices[Math.floor(Math.random() * choices.length)]; updatePrompt(); };
 $('next').onclick = () => { $('letter').value = letters[(letters.indexOf($('letter').value) + 1) % letters.length]; updatePrompt(); };
 $('check').onclick = () => {
-  prediction = recognize(strokes.map(s => s.points), templates); checkedRevision = revision;
+  prediction = recognize(pad.strokes.map(s => s.points), templates); checkedRevision = revision;
   const correct = prediction.letter === $('letter').value;
   $('result').className = correct ? 'success' : 'failure';
   $('result').textContent = correct ? `Correct! Recognized as ${prediction.letter}.` : prediction.letter ? `Incorrect. Recognized as ${prediction.letter}.` : 'Not recognized—try again.';
@@ -91,13 +67,16 @@ function updateCount() {
   $('sample-count').textContent = `${samples.length} saved samples · ${represented} of 26 letters represented`;
 }
 function saveSample(kind) {
-  if (!strokes.length || active || savedRevision === revision) return;
-  const result = checkedRevision === revision ? prediction : recognize(strokes.map(s => s.points), templates);
-  samples.push({ label: $('letter').value, kind, recognized: result.letter, createdAt: new Date().toISOString(), strokes: structuredClone(strokes) });
+  if (!pad.strokes.length || pad.active || savedRevision === revision) return;
+  const result = checkedRevision === revision ? prediction : recognize(pad.strokes.map(s => s.points), templates);
+  samples.push({ label: $('letter').value, kind, recognized: result.letter, createdAt: new Date().toISOString(), strokes: structuredClone(pad.strokes) });
   savedRevision = revision;
+  persistSamples(); redraw(); $('override').disabled = true;
+}
+function persistSamples() {
   try { localStorage.setItem(storageKey, JSON.stringify(samples)); $('storage-status').textContent = 'Sample saved in this browser.'; }
   catch { $('storage-status').textContent = 'Browser storage is unavailable or full. Export now to keep samples from this session.'; }
-  $('evaluation').replaceChildren(); updateCount(); redraw(); $('override').disabled = true;
+  $('evaluation').replaceChildren(); updateCount();
 }
 $('save').onclick = () => saveSample('labeled');
 $('override').onclick = () => { if (checkedRevision !== revision) return; saveSample('override'); $('result').className = 'success'; $('result').textContent = 'Marked correct by you. Drawing saved for review; the recognizer has not been retrained.'; };
@@ -123,3 +102,11 @@ $('evaluate').onclick = async () => {
   button.disabled = false;
 };
 updateCount(); updatePrompt();
+
+initWordPractice({ templates, ink: () => ink, saveSample: sample => { samples.push(sample); persistSamples(); } });
+$('practice-mode').onchange = () => {
+  const wordMode = $('practice-mode').value === 'word';
+  $('letter-practice').hidden = wordMode;
+  $('word-practice').hidden = !wordMode;
+  $('practice-title').textContent = wordMode ? 'Word practice' : 'Letter workbench';
+};

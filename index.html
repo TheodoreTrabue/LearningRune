@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LearningRune · Letter workbench</title>
+  <title>LearningRune · Practice notebook</title>
   <link rel="stylesheet" href="./style.css">
   <script type="module" src="./src/app.js"></script>
 </head>
@@ -11,7 +11,9 @@
   <header><div class="eyebrow">An alchemist’s notebook</div><h1>LearningRune</h1><p>A quiet place to practice your letters.</p></header>
   <main>
     <section class="workbench" aria-labelledby="practice-title">
-      <div class="heading"><div><span class="eyebrow">First experiment · A–Z</span><h2 id="practice-title">Letter workbench</h2></div><span class="badge">On-device recognition</span></div>
+      <div class="heading"><div><span class="eyebrow">Practice · A–Z</span><h2 id="practice-title">Letter workbench</h2></div><span class="badge">On-device recognition</span></div>
+      <div class="practice-picker"><label>Practice mode <select id="practice-mode"><option value="letter">Letter practice</option><option value="word">Word practice</option></select></label><fieldset id="colors"><legend>Ink</legend></fieldset></div>
+      <div id="letter-practice">
       <div class="settings">
         <label>Activity <select id="mode"><option value="practice">Practice</option><option value="collect">Collect handwriting samples</option></select></label>
         <label>Letter <select id="letter" aria-label="Choose English letter"></select></label>
@@ -20,15 +22,27 @@
       <p id="prompt" class="prompt"></p>
       <p id="activity-help" class="muted"></p>
       <div class="canvas-wrap"><canvas id="drawing" width="640" height="440" aria-label="Draw one Greenrune letter with a mouse or pen">Drawing requires a browser with canvas support.</canvas><span class="canvas-caption">Draw one symbol anywhere on the page</span></div>
-      <div class="toolbar"><fieldset id="colors"><legend>Ink</legend></fieldset><div class="tools"><button id="undo">Undo</button><button id="redo">Redo</button><button id="clear">Clear</button></div></div>
+      <div class="toolbar"><div class="tools"><button id="undo">Undo</button><button id="redo">Redo</button><button id="clear">Clear</button></div></div>
       <div class="actions"><button id="check" class="primary">Check</button><button id="next">Next letter</button><button id="save" hidden>Save labeled sample</button></div>
       <div id="result" role="status" aria-live="polite"><p>Ready when you are.</p></div>
       <div id="correction" hidden><p>Reference forms for this letter:</p><div id="answer" class="symbols"></div><button id="override">My drawing was correct — save for review</button></div>
       <details><summary>How to test handwriting</summary><ol><li>Open the alphabet below and verify our reference shapes first.</li><li>Choose <strong>Collect handwriting samples</strong> and select a letter.</li><li>Draw it naturally, then press <strong>Check</strong> to see the independent prediction.</li><li>Press <strong>Save labeled sample</strong> if your drawing correctly represents the selected letter. Clear and repeat with 3–5 natural variations.</li><li>Include both E and O forms. Try some samples with a mouse and others with a pen, if available.</li><li>Use <strong>Evaluate saved samples</strong> to find troublesome letters. Export samples when you want to share them for improvements.</li></ol><p>Samples and overrides do not automatically train the recognizer. Testing with fresh drawings helps reveal mistakes. No stroke order is required.</p></details>
+      </div>
+      <div id="word-practice" hidden>
+        <div class="settings"><label>Word <select id="word-choice"></select></label><button id="word-random">Random word</button></div>
+        <p id="word-prompt" class="prompt"></p>
+        <p class="muted">Write one letter per box, from left to right. Use full E and O symbols: short lines must attach to another letter. Words with EE or OO will come later.</p>
+        <p id="word-active" class="muted"></p>
+        <div id="word-boxes"></div>
+        <div class="toolbar"><button id="word-undo">Undo</button><button id="word-redo">Redo</button><button id="word-clear-letter">Clear letter</button><button id="word-clear">Clear word</button></div>
+        <div class="actions"><button id="word-check" class="primary">Check word</button><button id="word-next">Next word</button></div>
+        <p id="word-result" role="status" aria-live="polite"></p>
+        <p class="muted">Click or tab to a box to edit it. Overrides save that letter to your sample notebook for review.</p>
+      </div>
     </section>
     <aside>
       <section><h2>Your sample notebook</h2><p id="sample-count"></p><p class="muted">Saved only in this browser. Export a backup before clearing browser data.</p><div class="stack"><button id="evaluate">Evaluate saved samples</button><button id="export">Export samples as JSON</button></div><p id="storage-status" role="status"></p><div id="evaluation"></div></section>
-      <section><h2>About this experiment</h2><p>This recognizer compares your drawing against the whole alphabet and a fixed collection of handwriting examples. Your selected letter does not influence its prediction.</p><p>Natural size, position, and mild slant changes are allowed. Orientation matters; ink color and stroke order do not.</p><p>Words, nesting, stacking, and drawing English letters come later.</p></section>
+      <section><h2>About this experiment</h2><p>This recognizer compares your drawing against the whole alphabet and a fixed collection of handwriting examples. Your prompt does not influence its prediction.</p><p>Natural size, position, and mild slant changes are allowed. Orientation matters; ink color and stroke order do not.</p><p>Word practice uses separate boxes. Free-canvas words, nesting, stacking, and drawing English letters come later.</p></section>
     </aside>
       <section class="alphabet"><h2>Reference alphabet <span class="badge">Draft · for your review</span></h2><p>These are newly drawn reference shapes. Please flag any forms that need correction. Short E/O lines are allowed alone here for testing; in actual writing, they must attach to another letter. In doubled E/O, use the short line followed by the full symbol.</p><div id="alphabet-grid"></div></section>
   </main>

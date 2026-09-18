@@ -1,7 +1,8 @@
 # LearningRune
 
 A calm browser workbench for practicing English letters written in Greenrune.
-This prototype recognizes **one Greenrune letter at a time**, using reference
+Practice individual letters or **40 curated words in separate drawing boxes**.
+Each symbol is recognized independently, using reference
 shapes and a fixed library of development handwriting examples. Detail checks
 for W's tail and E's crossbar improved the latest fresh batch from 10/17 to
 17/17 correct, with no wrong-letter predictions. This is a small,
@@ -20,6 +21,31 @@ Open **http://localhost:5173** in your browser. Keep the terminal running;
 press Ctrl+C to stop it. No dependency installation or build is required.
 Use the local server rather than double-clicking `index.html`, because the app
 uses JavaScript modules.
+
+## Try word practice
+
+1. Choose **Word practice** in the practice-mode selector.
+2. Start with **CAT**. Draw its Greenrune letters left to right, one per box.
+3. Press **Check word**. Accepted letters turn green; incorrect or uncertain
+   drawings show the expected reference symbol.
+4. Click the box you want to fix. **Undo**, **Redo**, and **Clear letter** affect
+   that box only; **Clear word** clears all boxes. Editing invalidates that box's
+   previous grade or override without changing the other drawings.
+5. If a valid symbol was rejected, choose **My drawing was correct** under that
+   box. This saves the letter locally for review, including the word and position.
+6. Try **KEY** and **DOG** with the full E and O forms, then **Next word** or
+   **Random word**. The dropdown also lets you choose any word immediately.
+
+Short E/O lines cannot stand alone in this mode. They receive an attachment-rule
+explanation and cannot be overridden into a completed word. Full forms are shown
+as corrections. Words containing EE or OO are excluded for now. Letter practice
+still allows both forms for isolated-symbol testing.
+
+The recognizer does not see the expected word; grading compares its independent
+letter predictions afterward. The mode switch preserves in-progress drawings
+for the current page session. Changing words resets the word attempt. Attempts
+are not restored after a page reload; saved review samples remain in browser
+storage. The word mode has no timers, scores, accounts, or unlocks.
 
 ## First handwriting test
 
@@ -75,9 +101,9 @@ improvements. A/E and I/W remain especially difficult distinctions.
 
 Both E and O forms are accepted alone **only for isolated-symbol testing** in
 this workbench. In actual writing, short E/O forms must attach to other letters;
-they are not standalone symbols. Future word practice must enforce attachment
-and the short-form/full-form sequence for doubled E/O. Word and sentence
-practice, nesting, stacking, and reverse practice with uppercase/lowercase
+they are not standalone symbols. Boxed word practice requires full forms and
+excludes doubled EE/OO until attachment is supported. Free-canvas words,
+sentence practice, nesting, stacking, and reverse practice with uppercase/lowercase
 English drawings are not implemented in this milestone.
 
 ## Project structure
@@ -88,10 +114,16 @@ English drawings are not implemented in this milestone.
 - `src/details.js`: local tail and crossbar evidence for ambiguous I/W and A/E.
 - `src/handwriting-templates.js`: generated development examples and split metadata.
 - `src/app.js`: drawing input, feedback, sample collection, and browser storage.
+- `src/drawing-pad.js`: reusable canvas input and independent undo/redo histories.
+- `src/word-practice.js`: word selection, drawing boxes, corrections, and overrides.
+- `src/word-grader.js`: independent symbol grading and word-completion rules.
+- `src/words.js`: curated common and less-common words of two to five letters.
 - `server.js`: development-only static server; GitHub Pages serves the files itself.
 - `test/recognizer.test.js` and `test/handwriting.test.js`: geometry, split, and
   rejection checks (`npm test`).
-- `test/browser.html`: browser integration checks; open it through the local server.
+- `test/word-practice.test.js`: word-list, grading, completion, and E/O-rule checks.
+- `test/browser.html`: letter and word browser integration checks; open it through
+  the local server. Its temporary saved sample is removed afterward.
 - `scripts/`: reproducible model generation and benchmark tools.
 - `test/fixtures/`: frozen pre-improvement recognizer and reference geometry for
   comparisons. Browser checks also use the live SVG references.
