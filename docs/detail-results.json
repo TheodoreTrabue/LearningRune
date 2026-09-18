@@ -1,0 +1,476 @@
+{
+  "fresh": {
+    "mode": "fresh",
+    "sourceSha256": "482412a33ee7edd8df57efad3f2e9f266e9de9745c4824c6da32c1b26c92646b",
+    "count": 17,
+    "totals": {
+      "before": {
+        "correct": 10,
+        "wrong": 0,
+        "rejected": 7
+      },
+      "after": {
+        "correct": 17,
+        "wrong": 0,
+        "rejected": 0
+      }
+    },
+    "rows": [
+      {
+        "id": "a17bd82f8b9098c7fc45f1bee8e48cf614652ba011625f54289d36fdcf92f610",
+        "letter": "E",
+        "before": "E",
+        "after": "E"
+      },
+      {
+        "id": "806ff6ef3f28881cedd835752c57ac0bc95fd88c4000458ad659991eabee5ab9",
+        "letter": "E",
+        "before": null,
+        "after": "E"
+      },
+      {
+        "id": "09038df7bcd302b2e32c921e3bac9a70b74c1abaa1c80f52800253413eaf9cac",
+        "letter": "G",
+        "before": "G",
+        "after": "G"
+      },
+      {
+        "id": "95ead70c98ff35c02b240edb8c2cd9ec4c8b79d1fba4dbaed18559e1db53e4c6",
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "id": "5270e58513fe6695526713a2a5e8334d238038542076ef5c921a027025ecdb7b",
+        "letter": "W",
+        "before": "W",
+        "after": "W"
+      },
+      {
+        "id": "69ab547a3ec63a7ac6b1a0a3cc57a74176eb3e9211daf3e2fcec9e57f3ffb114",
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "id": "2059033a6aaa9ef57cad835067dfd3ad158419b5da5d9e22085d74bbbf8a75aa",
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "id": "fabac80e1c472737dc8cb4834be2d96ad225ec021f89c95e11ccd75307d84233",
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "id": "ff15705255d288e3b782943c703dd8266d034df74d1f22404bdb7a7b6dbfd68c",
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "id": "1afdca67123242d89ad89e29901ed658b3ac515a1b404c40ede377c13854814d",
+        "letter": "C",
+        "before": "C",
+        "after": "C"
+      },
+      {
+        "id": "59d8699986538a4bf19f15d0ff2d7f7defbfe574d6e15f725f57e3210731350d",
+        "letter": "E",
+        "before": null,
+        "after": "E"
+      },
+      {
+        "id": "b71ab0c18004e397eb6fb26a778de4026e60788834a2281c9c996660758e2432",
+        "letter": "F",
+        "before": "F",
+        "after": "F"
+      },
+      {
+        "id": "ffb7424fb205109560cb26baaf132df7b9af1b7b46cae97e834096d3a44dd99f",
+        "letter": "G",
+        "before": "G",
+        "after": "G"
+      },
+      {
+        "id": "26e133e97519ea322fed5ebe8ff3ec6714bb16c81fc1bddc3b3f833c57e996cd",
+        "letter": "K",
+        "before": "K",
+        "after": "K"
+      },
+      {
+        "id": "598ce60229267301c8d8dcb379dffe88673ef8489ff1075826c784542c14594d",
+        "letter": "L",
+        "before": "L",
+        "after": "L"
+      },
+      {
+        "id": "0caca6a6162c0c5f7ef11941f6302a313194e2f545a26763428cce1c76fd69d2",
+        "letter": "T",
+        "before": "T",
+        "after": "T"
+      },
+      {
+        "id": "ad9e99e326a60dfd29bdd3498b2d365f09cda6e117fc4a1c673bd8a687152107",
+        "letter": "W",
+        "before": "W",
+        "after": "W"
+      }
+    ]
+  },
+  "regression": {
+    "mode": "regression",
+    "sourceSha256": "482412a33ee7edd8df57efad3f2e9f266e9de9745c4824c6da32c1b26c92646b",
+    "count": 38,
+    "totals": {
+      "before": {
+        "correct": 33,
+        "wrong": 0,
+        "rejected": 5
+      },
+      "after": {
+        "correct": 37,
+        "wrong": 0,
+        "rejected": 1
+      }
+    },
+    "rows": [
+      {
+        "id": "03645ab042a7f4555c639e056d2c9b06265a22441835d3d6e4f316799a879cc3",
+        "letter": "A",
+        "before": null,
+        "after": "A"
+      },
+      {
+        "id": "b9cd6f2deed6b8d3b206347d9df8f0bb07316d6265df66e0cfef85f924f012a0",
+        "letter": "A",
+        "before": "A",
+        "after": "A"
+      },
+      {
+        "id": "ba7997ca25b7749880b3885fa46d5e7532d1240c18b05d32e36207c9b29c124a",
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "id": "90ab7c6a41f8ab93c663d49493ca93def8f1d5a654d907f96c28f67becdaf134",
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "id": "5a39a401b9ce0e9a6e5172e3907af61a01baec770ed3428d16757e4c76a5ab9d",
+        "letter": "C",
+        "before": "C",
+        "after": "C"
+      },
+      {
+        "id": "025bead562804bcb01ad3899c28de0e5aa835816cc2993ccd31dfb0b8afbede1",
+        "letter": "E",
+        "before": "E",
+        "after": "E"
+      },
+      {
+        "id": "307b28de3638d76ea01072add517d307023664a7efd833953bbb7298ecd7d37f",
+        "letter": "E",
+        "before": null,
+        "after": "E"
+      },
+      {
+        "id": "46376008ff20b83e4088515a0a6672cd9fa123b365936f0d6b4e1c4c4e1c9844",
+        "letter": "E",
+        "before": "E",
+        "after": "E"
+      },
+      {
+        "id": "641423f119002b20febd61912547e4a11255f6bb93e569ec97c9f4a571ea709b",
+        "letter": "F",
+        "before": "F",
+        "after": "F"
+      },
+      {
+        "id": "7f7db7b0dbba150ce5f054f585637cc5a1f6eeab0233b5d95a766bea926f1619",
+        "letter": "G",
+        "before": "G",
+        "after": "G"
+      },
+      {
+        "id": "79e40bf43d0b6fb3acde64ad409f665bde7816b6737dc63208eb61311c700e36",
+        "letter": "I",
+        "before": "I",
+        "after": "I"
+      },
+      {
+        "id": "07ac2bc63115a213a5f7ace95daea4498d44c7bf9cfbc1a2aae704292434eaeb",
+        "letter": "I",
+        "before": "I",
+        "after": "I"
+      },
+      {
+        "id": "80f6c148ddfee47d224c354c5b74286082b7eea5ebe26173f2e683706b69a1b2",
+        "letter": "K",
+        "before": "K",
+        "after": "K"
+      },
+      {
+        "id": "bf1a71977096bf8635d79031f019a540442e4ae88de71302fe678c04363ac6ff",
+        "letter": "L",
+        "before": "L",
+        "after": "L"
+      },
+      {
+        "id": "0a079f8be2639d81fbc220854601616a290fd6d7c24f016f12010462373f26b1",
+        "letter": "T",
+        "before": null,
+        "after": null
+      },
+      {
+        "id": "b44aa5da87b8aa4790c2fb0088a25bf2b79ae5a7c36f83b933a27b9c56181c39",
+        "letter": "T",
+        "before": "T",
+        "after": "T"
+      },
+      {
+        "id": "e9277b6878591def51e0cf61508e78c360303e8098cd7a83e081c610ecbe5d60",
+        "letter": "T",
+        "before": "T",
+        "after": "T"
+      },
+      {
+        "id": "39107ac5a799cc1623f9ee66c6b458507641834513d3058a9fc86591bf359140",
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "id": "fa72d92729177ea1e99ca099df890e262708f4324289f34e03c98024a51f8a56",
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "id": "9800fabd3ed5daa407be1b0885c32841b2b5c431e3b538a75feda2dbf61443fa",
+        "letter": "W",
+        "before": "W",
+        "after": "W"
+      },
+      {
+        "id": "c983ec83efcf3c63aa46f225e7ea144c765b2d4a8001f824bc160705d6b50bda",
+        "letter": "A",
+        "before": "A",
+        "after": "A"
+      },
+      {
+        "id": "6a4caad369ff67d923e960872d3e40a44d65069b79f1db7899e9b7b6505fb223",
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "id": "a3736927f212fc0e28772d82dc2b896be3455c03cc5122e3442c162c9fb78fe5",
+        "letter": "D",
+        "before": "D",
+        "after": "D"
+      },
+      {
+        "id": "07496c5a74926679db4328846ec7dac3bf73a7a47edb5d6444144dd7415eaf2a",
+        "letter": "H",
+        "before": "H",
+        "after": "H"
+      },
+      {
+        "id": "989d39e1974cf08924e1db1056ceb9a88ede6ffa6d50af4e7834b4c961afc5e1",
+        "letter": "I",
+        "before": "I",
+        "after": "I"
+      },
+      {
+        "id": "396a29c6bee11939ff7dfeb8fe4414c91f3d46824e99a0603af790dab4d5e194",
+        "letter": "J",
+        "before": "J",
+        "after": "J"
+      },
+      {
+        "id": "bf1374ea5a774148df48225f62b59929c46b0522777b7de7d034bcf9ee01fc65",
+        "letter": "M",
+        "before": "M",
+        "after": "M"
+      },
+      {
+        "id": "a2e7da9613035219a922f7aef920948183d800bbaf2188e5c11cd0fccfffbd6e",
+        "letter": "N",
+        "before": "N",
+        "after": "N"
+      },
+      {
+        "id": "dfdfe10a68ed54c8e05ceb5f8edbc80bf28a56025e07064668c365926808ea41",
+        "letter": "O",
+        "before": "O",
+        "after": "O"
+      },
+      {
+        "id": "9dfd581f1eb2ee2e9d3ee61ad5d0bdfea2dfa678f8e1ee12fc18b50c86f1db47",
+        "letter": "P",
+        "before": "P",
+        "after": "P"
+      },
+      {
+        "id": "019e8b4d17dc37cf0c724c730eb72ac10cae1b00de9e1aae153bba82f2280ea0",
+        "letter": "Q",
+        "before": "Q",
+        "after": "Q"
+      },
+      {
+        "id": "1c1e5dfd6b51b2de858cbc70b9adbe65987dc8a4f97a2dea26361eeb3bd4175d",
+        "letter": "R",
+        "before": "R",
+        "after": "R"
+      },
+      {
+        "id": "bd32026eb3844c3c205009a2f95e27a64f5b53b3925e407c38bd76562cbc6ab0",
+        "letter": "S",
+        "before": "S",
+        "after": "S"
+      },
+      {
+        "id": "7313f66e8398a4bf314f5fab5e1f6a9373a416ae4e5e55ba63bf265f497d0085",
+        "letter": "U",
+        "before": "U",
+        "after": "U"
+      },
+      {
+        "id": "530f48ada185fc72896ab8febb654d81ed455ba9f702984fdc6cb4477896f07e",
+        "letter": "V",
+        "before": "V",
+        "after": "V"
+      },
+      {
+        "id": "fa65529391d2ae881abffe7ee6264fd1ff3ebf13491740a1a15381dedcde247e",
+        "letter": "X",
+        "before": "X",
+        "after": "X"
+      },
+      {
+        "id": "641b7ccbf181fc5f92833d137bbb3845552265ffeb732e8454cb843181552dd4",
+        "letter": "Y",
+        "before": "Y",
+        "after": "Y"
+      },
+      {
+        "id": "420cfbe4fc82b07155f11b1c2161f91a11ec519a5d5767542928499ac630b84a",
+        "letter": "Z",
+        "before": "Z",
+        "after": "Z"
+      }
+    ]
+  },
+  "development": {
+    "totals": {
+      "before": {
+        "correct": 115,
+        "wrong": 1,
+        "rejected": 27
+      },
+      "after": {
+        "correct": 133,
+        "wrong": 0,
+        "rejected": 10
+      }
+    },
+    "changes": [
+      {
+        "letter": "E",
+        "before": null,
+        "after": "E"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "letter": "A",
+        "before": null,
+        "after": "A"
+      },
+      {
+        "letter": "E",
+        "before": null,
+        "after": "E"
+      },
+      {
+        "letter": "E",
+        "before": "A",
+        "after": "E"
+      },
+      {
+        "letter": "I",
+        "before": null,
+        "after": "I"
+      },
+      {
+        "letter": "I",
+        "before": null,
+        "after": "I"
+      },
+      {
+        "letter": "I",
+        "before": null,
+        "after": "I"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "letter": "A",
+        "before": null,
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": null,
+        "after": "A"
+      },
+      {
+        "letter": "E",
+        "before": null,
+        "after": "E"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": "W"
+      }
+    ]
+  }
+}

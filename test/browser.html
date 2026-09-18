@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>LearningRune browser checks</title>
+<body><h1>Browser integration checks</h1><pre id="output">Running…</pre><iframe id="app" src="../index.html" width="1000" height="700"></iframe>
+<script type="module">
+import { makeTemplates } from '../src/alphabet.js';
+import { prepareTemplates, recognize } from '../src/recognizer.js';
+import { handwritingTemplates } from '../src/handwriting-templates.js';
+const output = document.getElementById('output');
+const results = [];
+const assert = (condition, message) => { results.push(`${condition ? 'PASS' : 'FAIL'} ${message}`); };
+try {
+  const originals = makeTemplates();
+  const templates = [...prepareTemplates(originals), ...handwritingTemplates];
+  for (const template of originals) {
+    const prediction = recognize(template.strokes, templates);
+    assert(prediction.letter === template.letter, `Reference ${template.letter}: ${prediction.letter || 'uncertain'}`);
+  }
+  const frame = document.getElementById('app');
+  if (!frame.contentDocument.getElementById('check') || frame.contentDocument.readyState !== 'complete') await new Promise(resolve => frame.addEventListener('load', resolve, { once: true }));
+  const doc = frame.contentDocument, win = frame.contentWindow;
+  assert(doc.querySelectorAll('.letter-card').length === 26, 'Alphabet renders all 26 letters');
+  assert(doc.getElementById('check').disabled, 'Blank canvas cannot be checked');
+  const canvas = doc.getElementById('drawing');
+  const bounds = canvas.getBoundingClientRect();
+  const send = (type, x, y) => canvas.dispatchEvent(new win.PointerEvent(type, { pointerId: 1, button: 0, clientX: bounds.left + x / 640 * bounds.width, clientY: bounds.top + y / 440 * bounds.height }));
+  // Synthetic pointer events do not register a hardware pointer for capture.
+  canvas.setPointerCapture = () => {};
+  send('pointerdown', 160, 100); send('pointermove', 440, 100); send('pointermove', 300, 347); send('pointerup', 160, 100);
+  doc.getElementById('check').click();
+  assert(doc.getElementById('result').textContent.includes('Correct!'), 'Drawn triangle is recognized as A');
+  doc.getElementById('undo').click();
+  assert(doc.getElementById('check').disabled, 'Undo removes the stroke');
+  doc.getElementById('redo').click();
+  assert(!doc.getElementById('check').disabled, 'Redo restores the stroke');
+  doc.getElementById('clear').click();
+  assert(doc.getElementById('check').disabled, 'Clear empties canvas');
+} catch (error) { results.push(`FAIL ${error.stack}`); }
+output.textContent = results.join('\n');
+document.title = results.some(r => r.startsWith('FAIL')) ? 'FAIL' : 'PASS';
+</script></body></html>

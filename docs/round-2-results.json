@@ -1,0 +1,424 @@
+{
+  "development": {
+    "mode": "development",
+    "count": 35,
+    "totals": {
+      "before": {
+        "correct": 24,
+        "wrong": 2,
+        "rejected": 9
+      },
+      "after": {
+        "correct": 30,
+        "wrong": 0,
+        "rejected": 5
+      }
+    },
+    "meanRecognitionMs": 39.8,
+    "rows": [
+      {
+        "letter": "A",
+        "before": "A",
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": "A",
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": "A",
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": null,
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": "A",
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": "E",
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": "A",
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": "E",
+        "after": null
+      },
+      {
+        "letter": "A",
+        "before": null,
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": null,
+        "after": null
+      },
+      {
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "letter": "E",
+        "before": "E",
+        "after": "E"
+      },
+      {
+        "letter": "E",
+        "before": "E",
+        "after": "E"
+      },
+      {
+        "letter": "E",
+        "before": null,
+        "after": null
+      },
+      {
+        "letter": "E",
+        "before": "E",
+        "after": "E"
+      },
+      {
+        "letter": "E",
+        "before": null,
+        "after": "E"
+      },
+      {
+        "letter": "E",
+        "before": "E",
+        "after": "E"
+      },
+      {
+        "letter": "I",
+        "before": "I",
+        "after": "I"
+      },
+      {
+        "letter": "I",
+        "before": null,
+        "after": "I"
+      },
+      {
+        "letter": "I",
+        "before": "I",
+        "after": "I"
+      },
+      {
+        "letter": "I",
+        "before": null,
+        "after": "I"
+      },
+      {
+        "letter": "T",
+        "before": "T",
+        "after": "T"
+      },
+      {
+        "letter": "T",
+        "before": "T",
+        "after": "T"
+      },
+      {
+        "letter": "T",
+        "before": "T",
+        "after": "T"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": null
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": null
+      },
+      {
+        "letter": "W",
+        "before": "W",
+        "after": "W"
+      },
+      {
+        "letter": "W",
+        "before": "W",
+        "after": "W"
+      }
+    ]
+  },
+  "held-out": {
+    "mode": "held-out",
+    "count": 12,
+    "totals": {
+      "before": {
+        "correct": 7,
+        "wrong": 1,
+        "rejected": 4
+      },
+      "after": {
+        "correct": 10,
+        "wrong": 0,
+        "rejected": 2
+      }
+    },
+    "meanRecognitionMs": 39.2,
+    "rows": [
+      {
+        "letter": "A",
+        "before": null,
+        "after": "A"
+      },
+      {
+        "letter": "A",
+        "before": "A",
+        "after": "A"
+      },
+      {
+        "letter": "B",
+        "before": null,
+        "after": "B"
+      },
+      {
+        "letter": "B",
+        "before": "B",
+        "after": "B"
+      },
+      {
+        "letter": "E",
+        "before": "A",
+        "after": null
+      },
+      {
+        "letter": "E",
+        "before": "E",
+        "after": "E"
+      },
+      {
+        "letter": "I",
+        "before": null,
+        "after": "I"
+      },
+      {
+        "letter": "I",
+        "before": "I",
+        "after": "I"
+      },
+      {
+        "letter": "T",
+        "before": "T",
+        "after": "T"
+      },
+      {
+        "letter": "T",
+        "before": "T",
+        "after": "T"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": null
+      },
+      {
+        "letter": "W",
+        "before": "W",
+        "after": "W"
+      }
+    ]
+  },
+  "regression": {
+    "mode": "regression",
+    "count": 26,
+    "totals": {
+      "before": {
+        "correct": 22,
+        "wrong": 0,
+        "rejected": 4
+      },
+      "after": {
+        "correct": 23,
+        "wrong": 0,
+        "rejected": 3
+      }
+    },
+    "meanRecognitionMs": 38.1,
+    "rows": [
+      {
+        "letter": "A",
+        "before": null,
+        "after": null
+      },
+      {
+        "letter": "B",
+        "before": null,
+        "after": "B"
+      },
+      {
+        "letter": "C",
+        "before": "C",
+        "after": "C"
+      },
+      {
+        "letter": "D",
+        "before": "D",
+        "after": "D"
+      },
+      {
+        "letter": "E",
+        "before": "E",
+        "after": "E"
+      },
+      {
+        "letter": "F",
+        "before": "F",
+        "after": "F"
+      },
+      {
+        "letter": "G",
+        "before": "G",
+        "after": "G"
+      },
+      {
+        "letter": "H",
+        "before": "H",
+        "after": "H"
+      },
+      {
+        "letter": "I",
+        "before": "I",
+        "after": "I"
+      },
+      {
+        "letter": "J",
+        "before": "J",
+        "after": "J"
+      },
+      {
+        "letter": "K",
+        "before": "K",
+        "after": "K"
+      },
+      {
+        "letter": "L",
+        "before": "L",
+        "after": "L"
+      },
+      {
+        "letter": "M",
+        "before": "M",
+        "after": "M"
+      },
+      {
+        "letter": "N",
+        "before": "N",
+        "after": "N"
+      },
+      {
+        "letter": "O",
+        "before": "O",
+        "after": "O"
+      },
+      {
+        "letter": "P",
+        "before": "P",
+        "after": "P"
+      },
+      {
+        "letter": "Q",
+        "before": "Q",
+        "after": "Q"
+      },
+      {
+        "letter": "R",
+        "before": "R",
+        "after": "R"
+      },
+      {
+        "letter": "S",
+        "before": "S",
+        "after": "S"
+      },
+      {
+        "letter": "T",
+        "before": null,
+        "after": null
+      },
+      {
+        "letter": "U",
+        "before": "U",
+        "after": "U"
+      },
+      {
+        "letter": "V",
+        "before": "V",
+        "after": "V"
+      },
+      {
+        "letter": "W",
+        "before": null,
+        "after": null
+      },
+      {
+        "letter": "X",
+        "before": "X",
+        "after": "X"
+      },
+      {
+        "letter": "Y",
+        "before": "Y",
+        "after": "Y"
+      },
+      {
+        "letter": "Z",
+        "before": "Z",
+        "after": "Z"
+      }
+    ]
+  }
+}
